@@ -1,0 +1,25 @@
+.main-footer {
+    position: fixed;
+    bottom:0px;
+    width:100%;
+    height: 30px;
+    padding: 10px;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.table-actions {
+    width: 150px;
+}
+.divline {
+    display: inline-block;
+}
+.divright {
+    float: right;
+}
+
+.carditem {
+    background: #ECF0F5;
+}
