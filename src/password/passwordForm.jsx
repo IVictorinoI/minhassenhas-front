@@ -24,6 +24,10 @@ class PasswordForm extends Component {
                     <Field name='login' autoComplete="off" component={LabelAndInput} readOnly={readOnly}
                         label='Login' cols='12 4' placeholder='Informe o login/e-mail' />
                 </div>
+                <div className='box-body'>
+                    <Field name='url' autoComplete="off" component={LabelAndInput} readOnly={readOnly}
+                        label='Url' cols='12 4' placeholder='Informe a URL' />
+                </div>
                 
                 <If test={editing} >
                     <div>

@@ -7,7 +7,7 @@ import { copyToClipboard } from '../common/util/util'
 const INITIAL_VALUES = {  }
 
 export function getList() {
-    const request = axios.get(`${window.Params.URL_API}/passwords/myPasswords?sort=-_id`)
+    const request = axios.get(`${window.Params.URL_API}/passwords/myPasswords?sort=description`)
     return {
         type: 'PASSWORDS_FETCHED',
         payload: request
