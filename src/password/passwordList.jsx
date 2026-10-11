@@ -13,10 +13,10 @@ class PasswordList extends Component {
             <tr key={bc._id}>
                 <td>{bc.description}</td>
                 <td>
-                    <button className='btn btn-warning' onClick={() => this.props.showUpdate(bc)}>
+                    <button aria-label='Editar' className='btn btn-warning' onClick={() => this.props.showUpdate(bc)}>
                         <i className='fa fa-pencil'></i>
                     </button>
-                    <button className='btn btn-danger' onClick={() => this.props.showDelete(bc)}>
+                    <button aria-label='Excluir' className='btn btn-danger' onClick={() => this.props.showDelete(bc)}>
                         <i className='fa fa-trash-o'></i>
                     </button>
                 </td>

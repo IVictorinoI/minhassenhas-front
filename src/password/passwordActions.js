@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { toastr, notifyError } from '../common/msg/notify'
-import { showTabs, selectTab } from '../common/tab/tabActions'
+
 import { copyToClipboard } from '../common/util/util'
 
 const INITIAL_VALUES = {  }
@@ -73,28 +73,13 @@ function submit(values, method) {
     }
 }
 
-export function showUpdate(password) {
-    return [
-        showTabs('tabUpdate'),
-        selectTab('tabUpdate'),
-        { type: 'PASSWORD_SELECTED', payload: password }
-    ]
+export function closeDialog() {
+    return [{ type: 'PASSWORD_DIALOG', payload: null }, { type: 'PASSWORD_SELECTED', payload: INITIAL_VALUES }, changePassword(false)]
 }
-
-export function showDelete(password) {
-    return [
-        showTabs('tabDelete'),
-        selectTab('tabDelete'),
-        { type: 'PASSWORD_SELECTED', payload: password }
-    ]
+function openDialog(mode, password = INITIAL_VALUES) {
+    return [{ type: 'PASSWORD_SELECTED', payload: password }, changePassword(false), { type: 'PASSWORD_DIALOG', payload: mode }]
 }
-
-export function init() {
-    return [
-        showTabs('tabList', 'tabCreate'),
-        selectTab('tabList'),
-        getList(),
-        { type: 'PASSWORD_SELECTED', payload: INITIAL_VALUES },
-        changePassword(false)
-    ]
-}
+export function showCreate() { return openDialog('create') }
+export function showUpdate(password) { return openDialog('update', password) }
+export function showDelete(password) { return openDialog('delete', password) }
+export function init() { return [getList(), ...closeDialog()] }
