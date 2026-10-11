@@ -8,17 +8,17 @@ export default props => {
         <Grid cols={props.cols}>
             <div className='form-group'>
             <label htmlFor={props.name}>{props.label}</label>
-                <Select 
-                    {...input} 
+                <Select
+                    {...input}
                     placeholder={props.placeholder}
-                    readOnly={props.readOnly} 
+                    isDisabled={props.readOnly}
                     getOptionLabel={(option)=> props.displayProperty ? option[props.displayProperty] : option.value }
-                    getOptionValue={(option)=> option._id ? option._id : option.value }                   
-                    onChange={value => input.onChange(value)} 
-                    onBlur={() => input.onBlur(input.value)} 
+                    getOptionValue={(option)=> option._id ? option._id : option.value }
+                    onChange={value => input.onChange(value)}
+                    onBlur={() => input.onBlur(input.value)}
                     options={options}
                 />
-            </div>            
+            </div>
         </Grid>
     )
   }

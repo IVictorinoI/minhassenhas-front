@@ -6,14 +6,12 @@ import { bindActionCreators } from 'redux'
 import App from './app'
 import Auth from '../auth/auth'
 import { validateToken } from '../auth/authActions'
-import { toastr } from 'react-redux-toastr'
 
 class AuthOrApp extends Component {
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.auth.user) {
             this.props.validateToken(this.props.auth.user.token)
-            var user = this.props.auth.user
-        }        
+        }
     }
     render() {
         const { user, validToken } = this.props.auth
@@ -21,6 +19,7 @@ class AuthOrApp extends Component {
             axios.defaults.headers.common['authorization'] = user.token
             return <App>{this.props.children}</App>
         } else if (!user && !validToken) {
+            delete axios.defaults.headers.common['authorization']
             return <Auth />
         } else {
             return false

@@ -1,6 +1,7 @@
 const INITIAL_STATE = {summary: {credit: 12, debt: 10}}
 
 export default function(state = INITIAL_STATE, action) {
+    if (action.error) return state
     switch (action.type) {
         case 'BILLING_SUMMARY_FETCHED':
             return { ...state, summary: action.payload.data }

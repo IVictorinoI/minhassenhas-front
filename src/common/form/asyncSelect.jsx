@@ -13,16 +13,16 @@ export default class WithCallbacks extends Component {
     handleChange (selectedOption) {
         console.log(`Option selected:`, selectedOption);
     }
-      
+
   render() {
     return (
         <Grid cols={this.props.cols}>
             <div className='form-group'>
                 <label htmlFor={this.props.name}>{this.props.label}</label>
-                <Select 
+                <Select
                         //value={selectedOption}
                         placeholder={this.props.placeholder}
-                        readOnly={this.props.readOnly}
+                        isDisabled={this.props.readOnly}
                         onChange={this.handleChange}
                         options={options}
                     />

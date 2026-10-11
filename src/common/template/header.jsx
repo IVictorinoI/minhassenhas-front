@@ -1,19 +1,10 @@
 import React from 'react'
 import Navbar from './navbar'
-
-
-export default props => (
-    <header className='main-header'>
-        <a href='/#/' className='logo'>
-            <span className='logo-mini'><b>M</b>S</span>
-            <span className='logo-lg'>
-                <i className='fa fa-money'></i>
-                <font style={({ marginLeft: '0.8rem' })}>Minhas senhas</font>
-            </span>        
-        </a>
-        <nav className='navbar navbar-static-top'>
-            <a href className='sidebar-toggle' data-toggle='offcanvas'></a>
+export default () => (
+    <header className="app-header navbar navbar-expand bg-body">
+        <div className="container-fluid">
+            <a href="#/" className="navbar-brand">Minhas senhas</a>
             <Navbar />
-        </nav>
+        </div>
     </header>
 )

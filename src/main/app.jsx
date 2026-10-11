@@ -8,10 +8,10 @@ import Messages from '../common/msg/messages'
 export default class App extends Component {
     render() {
         return (
-            <div className='wrapper'>
+            <div className='app-wrapper'>
                 <Header />
                 <SideBar />
-                <div className='content-wrapper'> 
+                <div className='app-main'>
                     {this.props.children}
                 </div>
                 <Footer />

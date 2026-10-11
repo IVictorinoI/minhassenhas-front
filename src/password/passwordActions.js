@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { toastr } from 'react-redux-toastr'
-import { initialize } from 'redux-form'
+import { toastr, notifyError } from '../common/msg/notify'
 import { showTabs, selectTab } from '../common/tab/tabActions'
 import { copyToClipboard } from '../common/util/util'
 
@@ -20,7 +19,7 @@ export function seePassword(_id) {
         type: 'PASSWORD_VIEW',
         payload: request
     }
-    
+
 }
 
 export function copyPasswordToClipboard(_id) {
@@ -35,7 +34,7 @@ export function copyPasswordToClipboard(_id) {
             })
         })
         .catch(e => {
-            e.response.data.errors.forEach(error => toastr.error('Erro', error))
+            notifyError(e)
         })
     }
 }
@@ -61,31 +60,32 @@ export function remove(values) {
 
 function submit(values, method) {
     return dispatch => {
-        const id = values._id ? values._id : ''
-        axios[method](`${window.Params.URL_API}/passwords/${id}`, values)
+        const { _id, ...data } = values
+        const id = method === 'post' ? '' : (_id || '')
+        axios({ method, url: `${window.Params.URL_API}/passwords/${id}`, data })
             .then(resp => {
                 toastr.success('Sucesso', 'Operação Realizada com sucesso.')
                 dispatch(init())
             })
             .catch(e => {
-                e.response.data.errors.forEach(error => toastr.error('Erro', error))
+                notifyError(e)
             })
     }
 }
 
 export function showUpdate(password) {
-    return [ 
+    return [
         showTabs('tabUpdate'),
         selectTab('tabUpdate'),
-        initialize('passwordForm', password)
+        { type: 'PASSWORD_SELECTED', payload: password }
     ]
 }
 
 export function showDelete(password) {
-    return [ 
+    return [
         showTabs('tabDelete'),
         selectTab('tabDelete'),
-        initialize('passwordForm', password)
+        { type: 'PASSWORD_SELECTED', payload: password }
     ]
 }
 
@@ -94,7 +94,7 @@ export function init() {
         showTabs('tabList', 'tabCreate'),
         selectTab('tabList'),
         getList(),
-        initialize('passwordForm', INITIAL_VALUES),
+        { type: 'PASSWORD_SELECTED', payload: INITIAL_VALUES },
         changePassword(false)
     ]
 }

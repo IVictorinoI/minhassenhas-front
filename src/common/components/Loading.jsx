@@ -1,8 +1,2 @@
-import React from 'react';
-import ReactLoading from 'react-loading';
- 
-const Loading = ({ color }) => (
-    <ReactLoading type='spinningBubbles' color={color} height={'20%'} width={'20%'} />
-);
- 
-export default Loading;
+import React from 'react'
+export default ({ color }) => <span className="spinner-border" style={{ color }} role="status"><span className="visually-hidden">Carregando...</span></span>

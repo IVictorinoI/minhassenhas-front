@@ -1,58 +1,45 @@
 import './auth.css'
-import React, { Component } from 'react'
-import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
-import { login, signup } from './authActions'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import Field from '../common/form/field'
+import { login as loginAction, signup as signupAction } from './authActions'
 import Row from '../common/layout/row'
 import Grid from '../common/layout/grid'
 import Messages from '../common/msg/messages'
 import Input from '../common/form/inputAuth'
 
-class Auth extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { loginMode: true }
-    }
-
-    changeMode() {
-        this.setState({ loginMode: !this.state.loginMode })
-    }
-
-    onSubmit(values) {
-        const { login, signup } = this.props
-        this.state.loginMode ? login(values) : signup(values)
-    }
-
-    render() {
-        const { loginMode } = this.state
-        const { handleSubmit } = this.props
+export default function Auth() {
+    const [loginMode, setLoginMode] = useState(true)
+    const { control, handleSubmit } = useForm({ defaultValues: { name: '', email: '', password: '', confirm_password: '' } })
+    const dispatch = useDispatch()
+    const login = values => dispatch(loginAction(values))
+    const signup = values => dispatch(signupAction(values))
         return (
             <div className="login-box">
                 <div className="login-logo"><b> Minhas</b> Senhas</div>
                 <div className="login-box-body">
                     <p className="login-box-msg">Bem vindo!</p>
-                    <form onSubmit={handleSubmit(v => this.onSubmit(v))}>
-                        <Field component={Input} type="input" name="name"
+                    <form onSubmit={handleSubmit(values => loginMode ? login(values) : signup(values))}>
+                        <Field control={control} component={Input} type="text" name="name"
                             placeholder="Nome" icon='user' hide={loginMode} />
-                        <Field component={Input} type="email" name="email"
+                        <Field control={control} component={Input} type="email" name="email"
                             placeholder="E-mail" icon='envelope' />
-                        <Field component={Input} type="password" name="password"
+                        <Field control={control} component={Input} type="password" name="password"
                             placeholder="Senha" icon='lock' />
-                        <Field component={Input} type="password" name="confirm_password"
+                        <Field control={control} component={Input} type="password" name="confirm_password"
                             placeholder="Confirmar Senha" icon='lock' hide={loginMode} />
                         <Row>
                             <Grid cols="4">
                                 <button type="submit"
-                                    className="btn btn-primary btn-block btn-flat">
+                                    className="btn btn-primary w-100">
                                     {loginMode ? 'Entrar' : 'Registrar'}
                                 </button>
                             </Grid>
                         </Row>
                     </form>
                     <br />
-                    <a onClick={() => this.changeMode()}>
+                    <a onClick={() => setLoginMode(mode => !mode)}>
                         {loginMode ? 'Novo usuário? Registrar aqui!' :
                             'Já é cadastrado? Entrar aqui!'}
                     </a>
@@ -60,9 +47,4 @@ class Auth extends Component {
                 <Messages />
             </div>
         )
-    }
 }
-
-Auth = reduxForm({ form: 'authForm' })(Auth)
-const mapDispatchToProps = dispatch => bindActionCreators({ login, signup }, dispatch)
-export default connect(null, mapDispatchToProps)(Auth)

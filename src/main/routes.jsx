@@ -1,16 +1,17 @@
 import React from 'react'
-import { Router, Route, IndexRoute, Redirect, hashHistory } from 'react-router'
-
+import { HashRouter, Routes, Route, Navigate } from 'react-router'
 import AuthOrApp from './authOrApp'
 import Dashboard from '../dashboard/dashboard'
 import Password from '../password/password'
 
-export default props => (
-    <Router history={hashHistory}>
-        <Route path='/' component={AuthOrApp}>
-            <IndexRoute component={Dashboard} />
-            <Route path='/passwords' component={Password} />
-        </Route>
-        <Redirect from='*' to='/' />
-    </Router>
+export default () => (
+    <HashRouter>
+        <AuthOrApp>
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/passwords" element={<Password />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+        </AuthOrApp>
+    </HashRouter>
 )

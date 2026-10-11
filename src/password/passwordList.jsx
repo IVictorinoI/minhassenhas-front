@@ -5,9 +5,7 @@ import { getList, showUpdate, showDelete } from './passwordActions'
 
 class PasswordList extends Component {
 
-    componentWillMount() {
-        this.props.getList()
-    }
+
 
     renderRows() {
         const list = this.props.list || []

@@ -16,23 +16,23 @@ import Form from './passwordForm'
 
 class Password extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.init()
     }
 
     render() {
         return (
-            <div> 
+            <div>
                 <ContentHeader title='Senhas' small='Cadastro' />
-                <Content> 
-                    <Tabs> 
-                        <TabsHeader> 
+                <Content>
+                    <Tabs>
+                        <TabsHeader>
                             <TabHeader label='Listar' icon='bars' target='tabList' />
                             <TabHeader label='Incluir' icon='plus' target='tabCreate' />
                             <TabHeader label='Alterar' icon='pencil' target='tabUpdate' />
                             <TabHeader label='Excluir' icon='trash-o' target='tabDelete' />
-                        </TabsHeader> 
-                        <TabsContent> 
+                        </TabsHeader>
+                        <TabsContent>
                             <TabContent id='tabList'>
                                 <List />
                             </TabContent>
@@ -48,10 +48,10 @@ class Password extends Component {
                                 <Form onSubmit={this.props.remove} readOnly={true}
                                     submitLabel='Excluir' submitClass='danger' />
                             </TabContent>
-                        </TabsContent> 
-                    </Tabs> 
-                </Content> 
-            </div> 
+                        </TabsContent>
+                    </Tabs>
+                </Content>
+            </div>
         )
     }
 }

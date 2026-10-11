@@ -1,10 +1,3 @@
 import React from 'react'
-import { Link } from 'react-router'
-
-export default props => (
-    <li> 
-        <Link to={props.path}>
-            <i className={`fa fa-${props.icon}`}></i> <span>{props.label}</span>
-        </Link>
-    </li>
-)
+import { NavLink } from 'react-router'
+export default props => <li className="nav-item"><NavLink to={props.path} end className={({ isActive }) => 'nav-link' + (isActive ? ' active' : '')}><i className={'nav-icon fa fa-' + props.icon}></i><p>{props.label}</p></NavLink></li>

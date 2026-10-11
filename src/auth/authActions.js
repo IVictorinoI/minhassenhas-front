@@ -1,4 +1,4 @@
-import { toastr } from 'react-redux-toastr'
+import { toastr, notifyError } from '../common/msg/notify'
 import axios from 'axios'
 import consts from '../consts'
 
@@ -19,8 +19,7 @@ function submit(values, url) {
                 ])
             })
             .catch(e => {
-                e.response.data.errors.forEach(
-                    error => toastr.error('Erro', error))
+                notifyError(e)
             })
     }
 }
