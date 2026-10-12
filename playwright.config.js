@@ -5,8 +5,8 @@ module.exports = defineConfig({
     fullyParallel: true,
     use: { baseURL: 'http://127.0.0.1:18080', browserName: 'chromium', screenshot: 'on' },
     webServer: {
-        command: 'node node_modules/http-server/bin/http-server public -p 18080 -c-1',
+        command: 'node node_modules/http-server/bin/http-server dist -p 18080 -c-1',
         url: 'http://127.0.0.1:18080',
-        reuseExistingServer: false
-    }
+        reuseExistingServer: false,
+    },
 })

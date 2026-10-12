@@ -1,8 +1,0 @@
-.login-box { width: min(360px, calc(100% - 2rem)); margin: 7vh auto; }
-.login-logo { font-size: 2rem; text-align: center; margin-bottom: 1rem; }
-.login-box-body { background: #eee; padding: 1.5rem; border-radius: .4rem; }
-.login-box-msg { text-align: center; }
-.login-box a { cursor: pointer; }
-.login-box .has-feedback { position: relative; }
-.login-box .has-feedback input { padding-right: 2.5rem; }
-.login-box .has-feedback > span { position: absolute; right: .75rem; top: 50%; transform: translateY(-50%); color: #6c757d; }
