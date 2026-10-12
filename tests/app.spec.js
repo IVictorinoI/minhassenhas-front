@@ -125,6 +125,7 @@ test('signup and network errors remain usable on mobile', async ({ page }) => {
     await page.getByPlaceholder('Confirmar Senha', { exact: true }).fill('test-password')
     await page.getByRole('button', { name: 'Registrar', exact: true }).click()
     await expect(page.getByRole('heading', { name: /Dashboard/ })).toBeVisible()
+    await page.getByRole('button', { name: 'Abrir menu', exact: true }).click()
     await expect(page.getByRole('link', { name: 'Senhas', exact: true })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Senhas', exact: true })).toBeInViewport()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)

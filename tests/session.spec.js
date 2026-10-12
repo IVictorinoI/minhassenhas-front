@@ -81,6 +81,7 @@ test('mobile form validates and prevents duplicate writes', async ({ page }, tes
         await route.fulfill({ json: {} })
     })
     await authenticate(page)
+    await page.getByRole('button', { name: 'Abrir menu', exact: true }).click()
     await page.getByRole('link', { name: 'Senhas', exact: true }).click()
     await page.getByRole('button', { name: 'Novo', exact: true }).click()
     const dialog = page.getByRole('dialog')
